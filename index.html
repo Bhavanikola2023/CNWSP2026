@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools for Higher Education Faculty</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --accent-blue: #38bdf8;
+            --accent-emerald: #34d399;
+            --accent-violet: #a78bfa;
+            --accent-amber: #fbbf24;
+            --accent-rose: #fb7185;
+            --accent-cyan: #22d3ee;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: #475569;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(167, 139, 250, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-violet));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg-secondary);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            border-color: var(--accent-blue);
+        }
+
+        .nav-btn.active {
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            border-color: var(--accent-blue);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 80px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Tool Cards Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .tool-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--card-accent, var(--accent-blue)), transparent);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--card-accent, var(--accent-blue));
+            box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        .tool-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .tool-link:hover {
+            color: var(--text-primary);
+        }
+
+        .tool-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* GPT Cards */
+        .gpt-card {
+            --card-accent: var(--accent-violet);
+        }
+
+        .gpt-card.syllabus { --card-accent: var(--accent-emerald); }
+        .gpt-card.whisperer { --card-accent: var(--accent-cyan); }
+        .gpt-card.canvas { --card-accent: var(--accent-amber); }
+        .gpt-card.meta { --card-accent: var(--accent-rose); }
+        .gpt-card.content { --card-accent: var(--accent-blue); }
+        .gpt-card.math { --card-accent: var(--accent-violet); }
+
+        /* Prompt Cards */
+        .prompt-category {
+            margin-bottom: 2rem;
+        }
+
+        .prompt-category h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prompt-category h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        .prompt-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.25rem;
+            background: var(--bg-card);
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .prompt-header:hover {
+            background: #3d4f66;
+        }
+
+        .prompt-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .prompt-badge {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-notebooklm { background: rgba(251, 191, 36, 0.2); color: var(--accent-amber); }
+        .badge-chatgpt { background: rgba(52, 211, 153, 0.2); color: var(--accent-emerald); }
+        .badge-claude { background: rgba(251, 113, 133, 0.2); color: var(--accent-rose); }
+        .badge-perplexity { background: rgba(56, 189, 248, 0.2); color: var(--accent-blue); }
+        .badge-gemini { background: rgba(167, 139, 250, 0.2); color: var(--accent-violet); }
+        .badge-copilot { background: rgba(34, 211, 238, 0.2); color: var(--accent-cyan); }
+
+        .expand-icon {
+            transition: transform 0.3s ease;
+            color: var(--text-muted);
+        }
+
+        .prompt-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .prompt-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .prompt-card.expanded .prompt-content {
+            max-height: 2000px;
+        }
+
+        .prompt-inner {
+            padding: 1.25rem;
+        }
+
+        .prompt-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .prompt-text {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding: 0.6rem 1rem;
+            background: var(--accent-blue);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-btn:hover {
+            background: var(--text-primary);
+        }
+
+        .copy-btn.copied {
+            background: var(--accent-emerald);
+        }
+
+        .copy-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Best Practices Section */
+        .best-practices {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .practice-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .practice-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .practice-card ul {
+            list-style: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .practice-card li {
+            padding: 0.4rem 0;
+            padding-left: 1.25rem;
+            position: relative;
+        }
+
+        .practice-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav {
+                padding: 0.75rem 1rem;
+            }
+
+            .nav-btn {
+                padding: 0.5rem 0.75rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>AI Tools for Higher Education</h1>
+        <p>Interactive Resource Guide for Faculty</p>
+    </header>
+
+    <nav class="nav">
+        <button class="nav-btn active" onclick="scrollToSection('tools')">AI Tools</button>
+        <button class="nav-btn" onclick="scrollToSection('gpts')">Custom GPTs</button>
+        <button class="nav-btn" onclick="scrollToSection('prompts')">Prompt Templates</button>
+        <button class="nav-btn" onclick="scrollToSection('practices')">Best Practices</button>
+    </nav>
+
+    <main class="container">
+        <!-- AI Tools Section -->
+        <section id="tools" class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: rgba(56, 189, 248, 0.15); color: var(--accent-blue);">🛠️</div>
+                <h2>AI Tools</h2>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card" style="--card-accent: #10a37f;">
+                    <h3>💬 ChatGPT</h3>
+                    <p>Versatile conversational AI for content creation, brainstorming, coding assistance, and building custom GPTs for specialized tasks.</p>
+                    <a href="https://chat.openai.com" target="_blank" class="tool-link">
+                        Open ChatGPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card" style="--card-accent: #d97706;">
+                    <h3>🔮 Claude</h3>
+                    <p>Anthropic's AI assistant excelling at nuanced analysis, long-form writing, document review, and thoughtful explanations with strong reasoning.</p>
+                    <a href="https://claude.ai" target="_blank" class="tool-link">
+                        Open Claude
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card" style="--card-accent: #8b5cf6;">
+                    <h3>✨ Google Gemini</h3>
+                    <p>Google's multimodal AI with deep integration into Google Workspace, strong at research synthesis, data analysis, and creative tasks.</p>
+                    <a href="https://gemini.google.com" target="_blank" class="tool-link">
+                        Open Gemini
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card" style="--card-accent: #22d3ee;">
+                    <h3>🔍 Perplexity</h3>
+                    <p>AI-powered research engine combining conversational AI with real-time web search. Ideal for fact-checking and sourced research.</p>
+                    <a href="https://www.perplexity.ai" target="_blank" class="tool-link">
+                        Open Perplexity
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card" style="--card-accent: #0078d4;">
+                    <h3>🤖 Microsoft Copilot</h3>
+                    <p>AI assistant integrated with Microsoft 365. Streamlines Word, Excel, PowerPoint, and Outlook workflows with contextual assistance.</p>
+                    <a href="https://copilot.microsoft.com" target="_blank" class="tool-link">
+                        Open Copilot
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card" style="--card-accent: #fbbf24;">
+                    <h3>📓 NotebookLM</h3>
+                    <p>Google's grounded research tool. Upload documents and get AI analysis strictly based on your sources—no hallucinations. Creates podcasts and study aids.</p>
+                    <a href="https://notebooklm.google.com" target="_blank" class="tool-link">
+                        Open NotebookLM
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom GPTs Section -->
+        <section id="gpts" class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: rgba(167, 139, 250, 0.15); color: var(--accent-violet);">⚡</div>
+                <h2>Custom GPTs for Higher Education</h2>
+            </div>
+            <div class="tools-grid">
+                <div class="tool-card gpt-card syllabus">
+                    <h3>🧞 Syllabus Genie</h3>
+                    <p>Transforms course syllabi into clear, student-friendly, online-ready documents aligned with Quality Matters standards while preserving instructor voice and policy intent.</p>
+                    <a href="https://chatgpt.com/g/g-uXkGFmTg9-syllabus-genie" target="_blank" class="tool-link">
+                        Open GPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card gpt-card whisperer">
+                    <h3>🌬️ Course Whisperer</h3>
+                    <p>Evaluates and strengthens Regular and Substantive Interaction by improving instructor presence, feedback quality, announcements, and LMS engagement practices.</p>
+                    <a href="https://chatgpt.com/g/g-673809d2b3d081918e9cd3eca0dcb381-course-whisperer" target="_blank" class="tool-link">
+                        Open GPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card gpt-card canvas">
+                    <h3>🔢 Code Canvas Rich Content Editor</h3>
+                    <p>Designs and enhances Canvas LMS content using Canvas-safe HTML and CSS with a strong focus on accessibility, structure, and visual clarity.</p>
+                    <a href="https://chatgpt.com/g/g-2vocBjV7S-code-canvas-rich-content-editor" target="_blank" class="tool-link">
+                        Open GPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card gpt-card meta">
+                    <h3>🎯 Meta GPT: The GPT That Creates GPTs</h3>
+                    <p>Builds production-ready custom GPT system prompts using a structured framework so they are ready to deploy with no revisions needed.</p>
+                    <a href="https://chatgpt.com/g/g-68957f060c408191884985d8c0c0919a-meta-gpt-the-gpt-that-creates-gpts" target="_blank" class="tool-link">
+                        Open GPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card gpt-card content">
+                    <h3>📚 Course Content Generator</h3>
+                    <p>Generates complete course content including assessments, discussions, projects, rubrics, and activities aligned with CBE, IBL, and UDL frameworks.</p>
+                    <a href="https://chatgpt.com/g/g-689430300e5c81918bf288ea593d8e56-course-content-generator" target="_blank" class="tool-link">
+                        Open GPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="tool-card gpt-card math">
+                    <h3>🧮 AI-Resistant Math Content Creator</h3>
+                    <p>Creates online mathematics content designed to reduce AI misuse while supporting mastery learning, accessibility, and real-world problem solving.</p>
+                    <a href="https://chatgpt.com/g/g-68951e06853c8191957b0107975704f4-ai-resistant-math-content-creator" target="_blank" class="tool-link">
+                        Open GPT
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prompt Templates Section -->
+        <section id="prompts" class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: rgba(52, 211, 153, 0.15); color: var(--accent-emerald);">📝</div>
+                <h2>Prompt Templates</h2>
+            </div>
+
+            <!-- NotebookLM Prompts -->
+            <div class="prompt-category">
+                <h3>NotebookLM Prompts</h3>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
+                            Deep Dive Audio Overview
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Generate conversational podcast-style audio overviews of uploaded documents with customizable focus areas.</p>
+                            <div class="prompt-text">Generate a Deep Dive audio overview but focus specifically on the 'Risks' section of this report.
+
+---
+
+Create a podcast where the hosts debate the pros and cons of the strategy outlined in these slides.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
+                            Grounded Q&A with Citations
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Ask questions about your documents and get answers with clickable inline citations to source paragraphs.</p>
+                            <div class="prompt-text">Based on these 5 PDFs, what are the three most common arguments against remote work?
+
+---
+
+Compare the Q3 financial results from the 2023 document vs. the 2024 document in a table.
+
+---
+
+Where does the author explicitly mention 'ethical AI' in these notes?</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
+                            Quiz & Study Guide Generator
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Transform uploaded content into quizzes, action lists, and structured study materials.</p>
+                            <div class="prompt-text">Create a quiz with 10 multiple-choice questions based on this lecture transcript, and include an answer key at the end.
+
+---
+
+Turn these meeting notes into a 'Next Steps' action list assigned to specific departments.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
+                            Cross-Source Analysis
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Analyze up to 50 sources simultaneously to find patterns, themes, and synthesize information across documents.</p>
+                            <div class="prompt-text">I've uploaded 10 different history articles. What is the one theme that appears in all of them?
+
+---
+
+Synthesize the YouTube video transcript and the PDF report into a single 500-word blog post.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
+                            AI Assessment Scale Framework
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Create a visual guide defining how much AI is allowed for specific assignments (from "No AI" to "Full AI").</p>
+                            <div class="prompt-text">Extract the definitions for a 5-level "AI Use Scale" for academic assignments.
+• Define each level clearly (Level 0 to Level 4).
+• Provide a specific example of an allowed activity for each level.
+• List the "Student Deliverable" required for each (e.g., "Handwritten paper" vs. "Prompt log + Final Draft").
+• Summarize in a bulleted list.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
+                            OpenStax Curriculum Architect
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Generate high-quality, accessible teaching materials based strictly on OpenStax textbook content.</p>
+                            <div class="prompt-text"># Role and Objective
+Act as an Expert Instructional Designer and Subject Matter Expert specializing in Open Educational Resources (OER). Your goal is to generate high-quality, accessible teaching materials based strictly on the provided OpenStax textbook content.
+
+# Context Variables [USER: FILL THESE IN]
+* **Target Audience:** [INSERT STUDENT LEVEL, e.g., Undergraduate non-majors, AP High School, Graduate Students]
+* **OpenStax Textbook:** [INSERT BOOK TITLE, e.g., OpenStax Biology 2e, OpenStax U.S. History]
+* **Chapter/Section:** [INSERT CHAPTER NUMBER AND TITLE]
+* **Specific Learning Objective(s):** [INSERT KEY CONCEPTS OR STANDARDS TO COVER]
+* **Class Format:** [INSERT FORMAT, e.g., 60-minute in-person lecture, Asynchronous online module, Hybrid seminar]
+
+# Instructions
+Using the context provided, generate a "Lesson Resource Pack" that includes the following four components. Ensure all outputs are strictly aligned with the content found in the specified OpenStax text.
+
+## Component 1: Conceptual Summary & Analogy
+* Provide a concise, bulleted summary of the core concepts in this section (max 200 words).
+* Create one detailed, real-world analogy to explain the most complex concept in this section to [TARGET AUDIENCE].
+
+## Component 2: Active Learning Activity
+* Design a [INSERT DURATION, e.g., 15-minute] active learning activity.
+* **Format:** [INSERT PREFERENCE, e.g., Think-Pair-Share, Case Study, Jigsaw, Debate].
+* Include step-by-step instructions for the instructor and the necessary prompt/data for students.
+
+## Component 3: Formative Assessment (Quiz)
+* Create [INSERT NUMBER] multiple-choice questions based on the text.
+* Include the correct answer and a brief explanation for *why* the distractors (wrong answers) are incorrect, citing the specific concept from the text.
+
+## Component 4: Accessibility & Differentiation Strategy
+* Suggest one modification to make this lesson more accessible for students with [INSERT SPECIFIC NEED, e.g., visual impairments, ADHD, English Language Learners].
+* Provide a "Stretch" resource idea for advanced students who grasp the material quickly.
+
+# Tone and Style Guidelines
+* **Tone:** Encouraging, professional, and academic.
+* **Formatting:** Use clear headers, bold key terms, and utilize tables where appropriate for data comparison.
+* **Constraint:** Do not hallucinate content outside the scope of the specified OpenStax textbook. If the content is not in the text, note it explicitly.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ChatGPT Prompts -->
+            <div class="prompt-category">
+                <h3>ChatGPT Prompts</h3>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-chatgpt">ChatGPT</span>
+                            Rubric Generator
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Create detailed assessment rubrics with clear criteria and performance levels.</p>
+                            <div class="prompt-text"># Role
+Act as an experienced instructional designer specializing in assessment design for higher education.
+
+# Task
+Create a detailed analytic rubric for the following assignment:
+
+**Assignment Type:** [INSERT: essay, presentation, project, discussion post, lab report, etc.]
+**Course Level:** [INSERT: Introductory, Intermediate, Advanced, Graduate]
+**Subject Area:** [INSERT: your discipline]
+**Assignment Description:** [INSERT: brief description of the assignment]
+
+# Requirements
+1. Include 4-5 assessment criteria aligned with the assignment's learning objectives
+2. Create 4 performance levels: Exemplary (4), Proficient (3), Developing (2), Beginning (1)
+3. Write specific, observable descriptors for each cell (avoid vague language like "good" or "adequate")
+4. Include point values that total 100 points
+5. Add a row for providing qualitative feedback
+
+# Output Format
+Present the rubric in a table format suitable for copying into an LMS.
+
+# Constraints
+- Use action verbs from Bloom's Taxonomy appropriate to the course level
+- Ensure criteria are distinct with no overlap
+- Make performance level distinctions clear and measurable</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-chatgpt">ChatGPT</span>
+                            Discussion Question Designer
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Generate engaging discussion prompts that encourage critical thinking and substantive peer interaction.</p>
+                            <div class="prompt-text"># Role
+Act as a facilitator of online learning discussions with expertise in Socratic questioning and community of inquiry frameworks.
+
+# Task
+Design a discussion prompt for an online course that encourages deep thinking and meaningful peer engagement.
+
+# Context
+**Course:** [INSERT course name]
+**Topic/Module:** [INSERT specific topic]
+**Week in Semester:** [INSERT: early, mid, late semester]
+**Learning Objective:** [INSERT the specific objective this discussion supports]
+
+# Requirements
+Generate a discussion prompt that:
+1. Opens with a thought-provoking scenario, question, or real-world application
+2. Requires students to apply concepts (not just recall facts)
+3. Has no single "correct" answer to encourage diverse perspectives
+4. Includes 2-3 guiding sub-questions to scaffold deeper analysis
+5. Specifies response requirements (word count, citation expectations)
+6. Includes peer response guidelines that go beyond "I agree"
+
+# Output Format
+Provide:
+- The main discussion prompt (ready to paste into LMS)
+- Instructor notes: key points to look for in responses
+- Sample peer response starters to share with students
+
+# Constraints
+- Design to be AI-resistant (requires personal experience, opinion, or application)
+- Appropriate for asynchronous online discussion
+- Encourages connections to students' professional or personal contexts</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-chatgpt">ChatGPT</span>
+                            Feedback Generator
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Draft constructive, personalized feedback on student work that promotes growth.</p>
+                            <div class="prompt-text"># Role
+Act as an experienced educator skilled in providing formative feedback that motivates students while promoting academic growth.
+
+# Task
+Help me draft feedback for a student submission.
+
+# Context
+**Assignment Type:** [INSERT: essay, project, presentation, etc.]
+**Student Level:** [INSERT: freshman, senior, graduate, etc.]
+**Assignment Topic:** [INSERT: topic]
+**Grade Earned:** [INSERT: letter grade or points]
+
+# Student Work Summary
+[PASTE: key excerpts or describe the main points of the student's work]
+
+# Strengths Observed
+[INSERT: 2-3 things the student did well]
+
+# Areas for Improvement
+[INSERT: 2-3 areas that need work]
+
+# Requirements
+Generate feedback that:
+1. Opens with genuine, specific praise (not generic "good job")
+2. Uses a growth mindset framework ("Your analysis shows... Next time, consider...")
+3. Provides 2-3 actionable suggestions with concrete examples
+4. Connects feedback to rubric criteria or learning objectives
+5. Ends with encouragement and forward-looking guidance
+6. Maintains a supportive, professional tone
+
+# Constraints
+- Approximately 150-250 words
+- Avoid deficit language ("You failed to..." → "Consider adding...")
+- Reference specific elements from the student's work
+- Appropriate for sharing directly with the student</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claude Prompts -->
+            <div class="prompt-category">
+                <h3>Claude Prompts</h3>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-claude">Claude</span>
+                            Learning Objective Alignment Auditor
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Analyze and improve alignment between learning objectives, activities, and assessments.</p>
+                            <div class="prompt-text"># Role
+Act as a curriculum alignment specialist with expertise in backward design and constructive alignment principles.
+
+# Task
+Audit my course module for alignment between learning objectives, instructional activities, and assessments.
+
+# Module Information
+**Course:** [INSERT course name]
+**Module Topic:** [INSERT topic]
+
+**Learning Objectives:**
+1. [INSERT objective 1]
+2. [INSERT objective 2]
+3. [INSERT objective 3]
+
+**Instructional Activities:**
+[LIST your lectures, readings, discussions, labs, etc.]
+
+**Assessments:**
+[LIST your quizzes, assignments, projects, exams, etc.]
+
+# Analysis Requested
+1. **Alignment Matrix:** Create a table mapping each objective to supporting activities and assessments
+2. **Gap Analysis:** Identify any objectives without adequate practice opportunities or assessment
+3. **Bloom's Level Check:** Verify that assessment cognitive levels match objective verbs
+4. **Recommendations:** Suggest specific additions or modifications to improve alignment
+5. **Redundancy Check:** Flag any activities or assessments that don't connect to stated objectives
+
+# Output Format
+Provide a structured report with:
+- Visual alignment matrix (table format)
+- Narrative analysis of strengths and gaps
+- Prioritized list of 3-5 actionable recommendations
+
+# Constraints
+- Base analysis on evidence-based instructional design principles
+- Consider feasibility within typical course constraints
+- Maintain focus on student learning outcomes</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-claude">Claude</span>
+                            Case Study Developer
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Create realistic, nuanced case studies with teaching notes for active learning.</p>
+                            <div class="prompt-text"># Role
+Act as a case study author with expertise in problem-based learning and scenario development for higher education.
+
+# Task
+Develop a teaching case study for my course that presents a realistic, complex scenario requiring students to apply course concepts.
+
+# Context
+**Course:** [INSERT course name and level]
+**Target Concepts:** [INSERT 3-5 key concepts students should apply]
+**Industry/Context:** [INSERT relevant field: healthcare, business, education, engineering, etc.]
+**Desired Complexity:** [INSERT: introductory, intermediate, advanced]
+**Time Allocation:** [INSERT: homework assignment, single class session, multi-week project]
+
+# Requirements
+Generate a complete case study package including:
+
+## Part 1: The Case Narrative (Student-Facing)
+- Compelling opening that hooks readers
+- Realistic protagonist facing a genuine dilemma
+- Sufficient background information and data
+- Embedded complexity with multiple stakeholder perspectives
+- Open-ended conclusion requiring student decision-making
+- 800-1200 words
+
+## Part 2: Discussion Questions (Student-Facing)
+- 4-6 questions progressing from comprehension to analysis to synthesis
+- At least one question requiring students to take a position and defend it
+
+## Part 3: Teaching Notes (Instructor-Only)
+- Case synopsis and learning objectives
+- Suggested discussion flow and time allocation
+- Analysis of key decision points with multiple valid approaches
+- Common student misconceptions to address
+- Extension activities or variations
+
+# Constraints
+- Base the scenario on realistic situations (can be fictionalized composites)
+- Avoid clear "right answers" to encourage debate
+- Include enough ambiguity to require critical thinking
+- Ensure cultural sensitivity and diverse representation</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-claude">Claude</span>
+                            Syllabus Policy Language Reviewer
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Review and improve syllabus policy language for clarity, tone, and student-centeredness.</p>
+                            <div class="prompt-text"># Role
+Act as an expert in syllabus design and student-centered communication with knowledge of current best practices in higher education policy writing.
+
+# Task
+Review my syllabus policy section and suggest improvements for clarity, tone, and effectiveness.
+
+# Current Policy Text
+[PASTE your current policy language here - e.g., attendance policy, late work policy, academic integrity statement, AI use policy, etc.]
+
+# Analysis Requested
+Evaluate the policy on these dimensions:
+
+1. **Clarity:** Is the policy unambiguous? Could students misinterpret it?
+2. **Tone:** Is it welcoming or punitive? Does it assume good faith?
+3. **Completeness:** Are edge cases addressed? Are consequences clear?
+4. **Accessibility:** Is the reading level appropriate? Is it free of jargon?
+5. **Equity:** Could this policy disproportionately impact certain student populations?
+6. **Enforceability:** Is this realistic to implement consistently?
+
+# Output Format
+Provide:
+- Quick assessment summary (2-3 sentences)
+- Specific issues identified with line references
+- Revised policy language (ready to use)
+- Rationale for significant changes
+- Optional: alternative approaches used at other institutions
+
+# Constraints
+- Maintain my voice and intent while improving clarity
+- Balance flexibility with necessary structure
+- Consider both face-to-face and online contexts
+- Align with current higher education best practices</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perplexity Prompts -->
+            <div class="prompt-category">
+                <h3>Perplexity Prompts</h3>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-perplexity">Perplexity</span>
+                            Literature Review Starter
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Quickly survey current research on a topic with sourced citations for further exploration.</p>
+                            <div class="prompt-text">I'm preparing to teach a course module on [INSERT TOPIC].
+
+Provide a research briefing that includes:
+
+1. **Key Foundational Works:** What are the 3-5 most-cited seminal papers or books in this area that I should reference?
+
+2. **Current Debates:** What are the 2-3 active scholarly debates or unresolved questions in recent literature (2022-2025)?
+
+3. **Emerging Trends:** What new approaches, methodologies, or findings are gaining traction?
+
+4. **Practical Applications:** How is this research being applied in industry or practice?
+
+5. **Suggested Readings:** Recommend 3 accessible articles suitable for undergraduate students and 3 for graduate-level discussion.
+
+For each source mentioned, provide the full citation and a 1-sentence summary of its relevance.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-perplexity">Perplexity</span>
+                            Current Events Connector
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Find recent news and real-world examples that connect to course concepts.</p>
+                            <div class="prompt-text">I teach [INSERT COURSE NAME] and next week we're covering [INSERT TOPIC/CONCEPT].
+
+Find 3-5 recent news stories or real-world events from the past 6 months that I could use to illustrate this concept in class.
+
+For each example, provide:
+1. **Headline and Source** (with link)
+2. **Date of Publication**
+3. **2-3 Sentence Summary** of the relevant situation
+4. **Connection to Course Content:** Specifically how this illustrates [INSERT CONCEPT]
+5. **Discussion Question:** One thought-provoking question I could pose to students about this example
+
+Prioritize examples that:
+- Come from reputable news sources
+- Present multiple perspectives or complexity
+- Would be engaging for [INSERT: undergraduate/graduate] students
+- Represent diverse geographic or demographic contexts when possible</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-perplexity">Perplexity</span>
+                            Competitor Course Benchmarking
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Research how peer institutions are approaching similar courses and topics.</p>
+                            <div class="prompt-text">I'm redesigning my [INSERT COURSE NAME] course and want to benchmark against peer institutions.
+
+Search for publicly available syllabi, course descriptions, and curriculum information for similar courses at:
+- R1 research universities
+- Regional comprehensive universities
+- Community colleges (if applicable)
+
+Provide a comparative analysis including:
+
+1. **Common Topics Covered:** What content appears in most versions of this course?
+
+2. **Unique Approaches:** What innovative assignments, projects, or pedagogical approaches are other instructors using?
+
+3. **Textbook Trends:** What are the most commonly adopted textbooks or OER resources?
+
+4. **Technology Integration:** What tools, platforms, or software are being incorporated?
+
+5. **Assessment Patterns:** What types of assessments predominate (exams, projects, portfolios, etc.)?
+
+6. **Gap Opportunities:** Based on this survey, what topics or approaches might differentiate my course?
+
+Include links to any publicly available syllabi you reference.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini Prompts -->
+            <div class="prompt-category">
+                <h3>Gemini Prompts</h3>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-gemini">Gemini</span>
+                            AI Assessment Scale Infographic
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Create visual guides showing AI permission levels for assignments (from NotebookLM research).</p>
+                            <div class="prompt-text">Convert this text into a "Traffic Light" style infographic for a course syllabus.
+
+**AI Use Scale Definitions:**
+
+**Level 0 - No AI:** Traditional assessment, completely human-generated (e.g., in-class handwritten exams)
+**Level 1 - AI for Ideation:** AI may be used for brainstorming only; all writing must be original
+**Level 2 - AI for Editing:** AI may refine grammar/clarity; core ideas must be human-generated
+**Level 3 - AI as Co-Pilot:** Collaborative use with AI; requires prompt log submission
+**Level 4 - Full AI Integration:** AI-generated content acceptable with human critique/analysis
+
+**Design Requirements:**
+• Red Zone (Level 0-1): Strict limitations - show prohibited uses
+• Yellow Zone (Level 2-3): Collaborative use - show permitted assistance with conditions
+• Green Zone (Level 4): Full integration - show expectations for documentation
+
+For each level, include:
+- Clear definition
+- Visual icon or symbol
+- Student checklist of required submissions
+- Example assignment types
+
+Make it visually clean so a professor could copy-paste it into a slide deck or syllabus.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-gemini">Gemini</span>
+                            Lecture Slide Transformer
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Transform dense lecture notes into engaging slide content with speaker notes.</p>
+                            <div class="prompt-text"># Task
+Transform my lecture notes into a presentation-ready slide outline following multimedia learning principles.
+
+# My Lecture Notes
+[PASTE your lecture content, notes, or transcript here]
+
+# Requirements
+Create a slide deck outline with:
+
+1. **Title Slide:** Engaging title, my name, course info
+
+2. **Learning Objectives Slide:** 3-4 measurable objectives using action verbs
+
+3. **Content Slides (aim for 10-15):**
+   - One main idea per slide
+   - Headline that conveys the key takeaway (not just topic labels)
+   - 3-5 bullet points maximum OR a visual placeholder suggestion
+   - Speaker notes with elaboration, examples, and transition cues
+   - Suggested visual: image, diagram, chart, or video clip recommendation
+
+4. **Engagement Points:** Insert at least 2-3 "pause slides" for:
+   - Poll questions
+   - Think-pair-share prompts
+   - Brief activities
+
+5. **Summary Slide:** Key takeaways in student-friendly language
+
+6. **References Slide:** Any sources cited
+
+# Constraints
+- Follow the 6x6 rule (max 6 bullets, 6 words each) for readability
+- Avoid text walls; prioritize visuals
+- Include memory aids: acronyms, analogies, or mnemonics where helpful
+- Design for a 50-minute class session</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-gemini">Gemini</span>
+                            Interactive Activity Builder
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Create interactive HTML learning activities, quizzes, or tools for your LMS.</p>
+                            <div class="prompt-text"># Task
+Create a self-contained interactive HTML learning tool that I can embed in my LMS.
+
+# Activity Type
+[CHOOSE ONE: flashcard set, self-check quiz, drag-and-drop sorting, matching exercise, calculator/converter, decision tree, timeline explorer, vocabulary builder]
+
+# Content Details
+**Subject:** [INSERT subject area]
+**Topic:** [INSERT specific topic]
+**Learning Objective:** [INSERT what students should be able to do after completing this]
+
+**Content to Include:**
+[INSERT: terms and definitions, questions and answers, concepts to sort, etc.]
+
+# Technical Requirements
+- Single HTML file with embedded CSS and JavaScript
+- No external dependencies
+- Mobile-responsive design
+- Accessible (keyboard navigable, screen reader friendly)
+- Clean, professional appearance suitable for higher education
+
+# Features to Include
+- Immediate feedback on responses
+- Score tracking or progress indicator
+- Option to retry/reset
+- Instructions for students
+- Visual indication of correct/incorrect
+
+# Constraints
+- Must work when embedded in Canvas/Blackboard/Moodle
+- No server-side code
+- Keep file size reasonable for LMS upload
+- Test all interactive elements before providing final code</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copilot Prompts -->
+            <div class="prompt-category">
+                <h3>Microsoft Copilot Prompts</h3>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-copilot">Copilot</span>
+                            Meeting Notes to Action Items
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Transform meeting notes or transcripts into organized action items with owners and deadlines.</p>
+                            <div class="prompt-text">I have notes from a [INSERT: department meeting, committee meeting, student advising session, curriculum review meeting].
+
+Transform these notes into a structured action summary.
+
+**Meeting Notes:**
+[PASTE your notes or transcript here]
+
+**Generate:**
+
+1. **Meeting Summary** (3-4 sentences covering key discussion points)
+
+2. **Decisions Made** (bulleted list of any conclusions reached)
+
+3. **Action Items Table** with columns:
+   - Task Description
+   - Owner/Responsible Party
+   - Deadline (if mentioned, or suggest "TBD")
+   - Priority (High/Medium/Low based on context)
+
+4. **Open Questions** (items that need follow-up or weren't resolved)
+
+5. **Next Steps** (what should happen before the next meeting)
+
+**Format** the output so I can paste it directly into:
+- An email to attendees
+- A Word document for records
+- A Teams/Slack message for quick sharing</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-copilot">Copilot</span>
+                            Email Response Templates
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Generate professional email responses for common faculty communication scenarios.</p>
+                            <div class="prompt-text">Help me draft an email response for the following situation:
+
+**Scenario:** [CHOOSE ONE]
+- Student requesting deadline extension
+- Student disputing a grade
+- Student asking for letter of recommendation
+- Colleague requesting collaboration
+- Administrator requesting report/data
+- Parent inquiring about student (FERPA considerations)
+- Student missing excessive classes
+- Student requesting incomplete grade
+
+**Context:**
+[INSERT any relevant details about the specific situation]
+
+**My Initial Reaction/Decision:**
+[INSERT: what I plan to do - grant/deny request, proposed compromise, etc.]
+
+**Generate an email that:**
+1. Opens with appropriate acknowledgment of their message
+2. Clearly communicates my decision/response
+3. Provides rationale when appropriate (especially for denials)
+4. Offers alternatives or resources when declining
+5. Maintains professional, empathetic tone
+6. Includes appropriate next steps
+7. Closes professionally
+
+**Constraints:**
+- Keep under 200 words
+- Maintain boundaries while being supportive
+- Include any necessary policy references
+- Appropriate for [INSERT: undergraduate/graduate] students</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-copilot">Copilot</span>
+                            Excel Grade Analysis Helper
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Get Excel formulas and analysis approaches for gradebook management.</p>
+                            <div class="prompt-text">I need help analyzing my course gradebook in Excel.
+
+**My Gradebook Structure:**
+- Column A: Student Names
+- Column B: Student IDs
+- Columns C-G: Assignment grades (points vary)
+- Columns H-J: Exam grades
+- Column K: Participation
+- [Modify to match your actual structure]
+
+**Help me create formulas for:**
+
+1. **Weighted Final Grade Calculation**
+   - Assignments: 30%
+   - Exams: 50%
+   - Participation: 20%
+   [Adjust percentages as needed]
+
+2. **Letter Grade Assignment** (using standard scale: A=90+, B=80-89, etc.)
+
+3. **Class Statistics Dashboard:**
+   - Average, median, and standard deviation for each assessment
+   - Grade distribution count (how many As, Bs, etc.)
+   - Identification of students below 70% for early alert
+
+4. **Conditional Formatting Rules:**
+   - Highlight missing assignments (blank cells)
+   - Flag students at risk (current average below C)
+   - Color-code by letter grade
+
+5. **Drop Lowest Score:** Formula to calculate assignment average while dropping the lowest grade
+
+Provide the exact Excel formulas with cell references I can adapt, plus brief explanations of what each does.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Practices Section -->
+        <section id="practices" class="section">
+            <div class="section-header">
+                <div class="section-icon" style="background: rgba(251, 191, 36, 0.15); color: var(--accent-amber);">💡</div>
+                <h2>Prompt Best Practices</h2>
+            </div>
+            <div class="best-practices">
+                <div class="practice-card">
+                    <h4>🎯 Be Specific</h4>
+                    <ul>
+                        <li>Define the role you want AI to assume</li>
+                        <li>Specify your audience and context</li>
+                        <li>Include relevant constraints (word count, format, tone)</li>
+                        <li>Provide examples of desired output</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <h4>📋 Structure Your Prompts</h4>
+                    <ul>
+                        <li>Use clear sections: Role, Task, Context, Requirements</li>
+                        <li>Break complex requests into numbered steps</li>
+                        <li>Specify output format explicitly</li>
+                        <li>Include "do" and "don't" instructions</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <h4>🔄 Iterate and Refine</h4>
+                    <ul>
+                        <li>Start with a draft, then improve based on output</li>
+                        <li>Ask follow-up questions to refine results</li>
+                        <li>Save effective prompts for reuse</li>
+                        <li>Test prompts across different AI tools</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <h4>⚖️ Use AI Responsibly</h4>
+                    <ul>
+                        <li>Always review and verify AI output</li>
+                        <li>Maintain your authentic voice and judgment</li>
+                        <li>Be transparent about AI use when appropriate</li>
+                        <li>Protect student privacy in prompts</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <h4>🎓 Higher Ed Considerations</h4>
+                    <ul>
+                        <li>Align AI use with institutional policies</li>
+                        <li>Model responsible AI use for students</li>
+                        <li>Design AI-resistant assessments when needed</li>
+                        <li>Use AI to enhance, not replace, your expertise</li>
+                    </ul>
+                </div>
+
+                <div class="practice-card">
+                    <h4>🛠️ Tool Selection Tips</h4>
+                    <ul>
+                        <li><strong>Perplexity:</strong> Research with citations</li>
+                        <li><strong>NotebookLM:</strong> Document-grounded analysis</li>
+                        <li><strong>ChatGPT:</strong> Custom GPTs, creative tasks</li>
+                        <li><strong>Claude:</strong> Long-form writing, analysis</li>
+                        <li><strong>Copilot:</strong> Microsoft 365 integration</li>
+                        <li><strong>Gemini:</strong> Google Workspace, multimodal</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>AI Tools for Higher Education Faculty • Resource Guide</p>
+    </footer>
+
+    <script>
+        // Toggle prompt expansion
+        function togglePrompt(header) {
+            const card = header.closest('.prompt-card');
+            card.classList.toggle('expanded');
+        }
+
+        // Copy prompt to clipboard
+        function copyPrompt(button) {
+            const promptText = button.closest('.prompt-inner').querySelector('.prompt-text').textContent;
+            navigator.clipboard.writeText(promptText).then(() => {
+                button.classList.add('copied');
+                button.innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Copied!
+                `;
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        Copy Prompt
+                    `;
+                }, 2000);
+            });
+        }
+
+        // Scroll to section and update nav
+        function scrollToSection(id) {
+            const section = document.getElementById(id);
+            section.scrollIntoView({ behavior: 'smooth' });
+            
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // Update nav on scroll
+        window.addEventListener('scroll', () => {
+            const sections = ['tools', 'gpts', 'prompts', 'practices'];
+            const navButtons = document.querySelectorAll('.nav-btn');
+            
+            let current = '';
+            sections.forEach(id => {
+                const section = document.getElementById(id);
+                const sectionTop = section.offsetTop - 100;
+                if (window.scrollY >= sectionTop) {
+                    current = id;
+                }
+            });
+
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('onclick').includes(current)) {
+                    btn.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
