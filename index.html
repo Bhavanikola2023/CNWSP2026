@@ -795,11 +795,11 @@ Synthesize the YouTube video transcript and the PDF report into a single 500-wor
                     </div>
                 </div>
 
-                <div class="prompt-card">
+           <div class="prompt-card">
                     <div class="prompt-header" onclick="togglePrompt(this)">
                         <span class="prompt-title">
-                            <span class="prompt-badge badge-notebooklm">NotebookLM</span>
-                            OpenStax Curriculum Architect
+                            <span class="prompt-badge badge-notebooklm">NotebookLM Research UseCase-1</span>
+                            Cross-Source Analysis
                         </span>
                         <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -807,41 +807,32 @@ Synthesize the YouTube video transcript and the PDF report into a single 500-wor
                     </div>
                     <div class="prompt-content">
                         <div class="prompt-inner">
-                            <p class="prompt-description">Generate high-quality, accessible teaching materials based strictly on OpenStax textbook content.</p>
-                            <div class="prompt-text"># Role and Objective
-Act as an Expert Instructional Designer and Subject Matter Expert specializing in Open Educational Resources (OER). Your goal is to generate high-quality, accessible teaching materials based strictly on the provided OpenStax textbook content.
+                            <p class="prompt-description">Creating a visual guide for students that clearly defines "how much" AI is allowed for a specific assignment (e.g., from "No AI" to "Full AI").</p>
+                            <div class="prompt-text">
 
-# Context Variables [USER: FILL THESE IN]
-* **Target Audience:** [INSERT STUDENT LEVEL, e.g., Undergraduate non-majors, AP High School, Graduate Students]
-* **OpenStax Textbook:** [INSERT BOOK TITLE, e.g., OpenStax Biology 2e, OpenStax U.S. History]
-* **Chapter/Section:** [INSERT CHAPTER NUMBER AND TITLE]
-* **Specific Learning Objective(s):** [INSERT KEY CONCEPTS OR STANDARDS TO COVER]
-* **Class Format:** [INSERT FORMAT, e.g., 60-minute in-person lecture, Asynchronous online module, Hybrid seminar]
 
-# Instructions
-Using the context provided, generate a "Lesson Resource Pack" that includes the following four components. Ensure all outputs are strictly aligned with the content found in the specified OpenStax text.
+Find explanations of "AI Assessment Scales" or "AI Permissibility Spectrums" for universities. Look for frameworks that categorize use into levels like:
+**Level 0 - No AI:** Traditional assessment, completely human-generated (e.g., in-class handwritten exams)
+**Level 1 - AI for Ideation:** AI may be used for brainstorming only; all writing must be original
+**Level 2 - AI for Editing:** AI may refine grammar/clarity; core ideas must be human-generated
+**Level 3 - AI as Co-Pilot:** Collaborative use with AI; requires prompt log submission
+**Level 4 - Full AI Integration:** AI-generated content acceptable with human critique/analysis
+                                
+**NotebookLM Summary Prompt**
+Extract the definitions for a 5-level "AI Use Scale" for academic assignments.
+•	Define each level clearly (Level 0 to Level 4).
+•	Provide a specific example of an allowed activity for each level.
+•	List the "Student Deliverable" required for each (e.g., "Handwritten paper" vs. "Prompt log + Final Draft").
+•	Summarize in a bulleted list.
 
-## Component 1: Conceptual Summary & Analogy
-* Provide a concise, bulleted summary of the core concepts in this section (max 200 words).
-* Create one detailed, real-world analogy to explain the most complex concept in this section to [TARGET AUDIENCE].
-
-## Component 2: Active Learning Activity
-* Design a [INSERT DURATION, e.g., 15-minute] active learning activity.
-* **Format:** [INSERT PREFERENCE, e.g., Think-Pair-Share, Case Study, Jigsaw, Debate].
-* Include step-by-step instructions for the instructor and the necessary prompt/data for students.
-
-## Component 3: Formative Assessment (Quiz)
-* Create [INSERT NUMBER] multiple-choice questions based on the text.
-* Include the correct answer and a brief explanation for *why* the distractors (wrong answers) are incorrect, citing the specific concept from the text.
-
-## Component 4: Accessibility & Differentiation Strategy
-* Suggest one modification to make this lesson more accessible for students with [INSERT SPECIFIC NEED, e.g., visual impairments, ADHD, English Language Learners].
-* Provide a "Stretch" resource idea for advanced students who grasp the material quickly.
-
-# Tone and Style Guidelines
-* **Tone:** Encouraging, professional, and academic.
-* **Formatting:** Use clear headers, bold key terms, and utilize tables where appropriate for data comparison.
-* **Constraint:** Do not hallucinate content outside the scope of the specified OpenStax textbook. If the content is not in the text, note it explicitly.</div>
+Gemini Infographic Prompt
+Convert this text into a "Traffic Light" style infographic for a course syllabus.
+•	Red Zone (Level 0-1): Strict limitations.
+•	Yellow Zone (Level 2-3): Collaborative use.
+•	Green Zone (Level 4): Full integration.
+•	For each level, include the Definition, an Icon, and a "Student Checklist" of what they need to submit.
+•	Make it visually clean so a professor could copy-paste it into a slide deck.
+</div>
                             <button class="copy-btn" onclick="copyPrompt(this)">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
@@ -850,9 +841,46 @@ Using the context provided, generate a "Lesson Resource Pack" that includes the 
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>     
+ <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-notebooklm">NotebookLM Research UseCase-1</span>
+                            Cross-Source Analysis
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">  Visualizing which academic disciplines are most "exposed" to AI automation, helping faculty discuss curriculum changes.</p>
+                            <div class="prompt-text">
 
+**NotebookLM Search Prompt**
+"AI exposure scores by occupation and academic discipline 2024-2030. Look for reports from the ILO (International Labour Organization), WEF Future of Jobs, or University of Pennsylvania studies on 'LLM exposure by major'. Focus on disciplines like Computer Science, Creative Writing, Accounting, Nursing, Graphic Design, and Philosophy."
+**NotebookLM Dataset Prompt**
+Create a structured dataset for a heatmap showing "AI Disruption Intensity" for academic disciplines from 2023 to 2030.
+•	Rows: Academic Disciplines (CS, Humanities, Arts, Business, Health, etc.).
+•	Columns: Year (2023–2030).
+•	Values: A score from 0-100 indicating how much the curriculum needs to change due to AI.
+**Gemini Heatmap Prompt**
+Create an animated heatmap displaying "Curriculum Disruption Risks" by discipline.
+•	Use the dataset below. Darker red means "High urgency to update curriculum."
+•	Animate the map to show how disciplines like "Creative Writing" or "Computer Science" might turn red faster than "Nursing" or "Trade Skills."
+•	Include a sidebar annotation that highlights why a specific row spikes in intensity (e.g., "Release of GPT-4," "AI Video Generation tools").
+
+
+</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>     
             <!-- ChatGPT Prompts -->
             <div class="prompt-category">
                 <h3>ChatGPT Prompts</h3>
@@ -1333,52 +1361,7 @@ Include links to any publicly available syllabi you reference.</div>
             <div class="prompt-category">
                 <h3>Gemini Prompts</h3>
 
-                <div class="prompt-card">
-                    <div class="prompt-header" onclick="togglePrompt(this)">
-                        <span class="prompt-title">
-                            <span class="prompt-badge badge-gemini">Gemini</span>
-                            AI Assessment Scale Infographic
-                        </span>
-                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                    </div>
-                    <div class="prompt-content">
-                        <div class="prompt-inner">
-                            <p class="prompt-description">Create visual guides showing AI permission levels for assignments (from NotebookLM research).</p>
-                            <div class="prompt-text">Convert this text into a "Traffic Light" style infographic for a course syllabus.
-
-**AI Use Scale Definitions:**
-
-**Level 0 - No AI:** Traditional assessment, completely human-generated (e.g., in-class handwritten exams)
-**Level 1 - AI for Ideation:** AI may be used for brainstorming only; all writing must be original
-**Level 2 - AI for Editing:** AI may refine grammar/clarity; core ideas must be human-generated
-**Level 3 - AI as Co-Pilot:** Collaborative use with AI; requires prompt log submission
-**Level 4 - Full AI Integration:** AI-generated content acceptable with human critique/analysis
-
-**Design Requirements:**
-• Red Zone (Level 0-1): Strict limitations - show prohibited uses
-• Yellow Zone (Level 2-3): Collaborative use - show permitted assistance with conditions
-• Green Zone (Level 4): Full integration - show expectations for documentation
-
-For each level, include:
-- Clear definition
-- Visual icon or symbol
-- Student checklist of required submissions
-- Example assignment types
-
-Make it visually clean so a professor could copy-paste it into a slide deck or syllabus.</div>
-                            <button class="copy-btn" onclick="copyPrompt(this)">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                                </svg>
-                                Copy Prompt
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="prompt-card">
+                                <div class="prompt-card">
                     <div class="prompt-header" onclick="togglePrompt(this)">
                         <span class="prompt-title">
                             <span class="prompt-badge badge-gemini">Gemini</span>
@@ -1491,7 +1474,65 @@ Create a self-contained interactive HTML learning tool that I can embed in my LM
                     </div>
                 </div>
             </div>
+                
 
+         <div class="prompt-card">
+                    <div class="prompt-header" onclick="togglePrompt(this)">
+                        <span class="prompt-title">
+                            <span class="prompt-badge badge-gemini">Gemini Gem</span>
+                            Interactive Activity Builder
+                        </span>
+                        <svg class="expand-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                    <div class="prompt-content">
+                        <div class="prompt-inner">
+                            <p class="prompt-description">Generate high-quality, accessible teaching materials based strictly on OpenStax textbook content.</p>
+                            <div class="prompt-text"># Role and Objective
+Act as an Expert Instructional Designer and Subject Matter Expert specializing in Open Educational Resources (OER). Your goal is to generate high-quality, accessible teaching materials based strictly on the provided OpenStax textbook content.
+
+# Context Variables [USER: FILL THESE IN]
+* **Target Audience:** [INSERT STUDENT LEVEL, e.g., Undergraduate non-majors, AP High School, Graduate Students]
+* **OpenStax Textbook:** [INSERT BOOK TITLE, e.g., OpenStax Biology 2e, OpenStax U.S. History]
+* **Chapter/Section:** [INSERT CHAPTER NUMBER AND TITLE]
+* **Specific Learning Objective(s):** [INSERT KEY CONCEPTS OR STANDARDS TO COVER]
+* **Class Format:** [INSERT FORMAT, e.g., 60-minute in-person lecture, Asynchronous online module, Hybrid seminar]
+
+# Instructions
+Using the context provided, generate a "Lesson Resource Pack" that includes the following four components. Ensure all outputs are strictly aligned with the content found in the specified OpenStax text.
+
+## Component 1: Conceptual Summary & Analogy
+* Provide a concise, bulleted summary of the core concepts in this section (max 200 words).
+* Create one detailed, real-world analogy to explain the most complex concept in this section to [TARGET AUDIENCE].
+
+## Component 2: Active Learning Activity
+* Design a [INSERT DURATION, e.g., 15-minute] active learning activity.
+* **Format:** [INSERT PREFERENCE, e.g., Think-Pair-Share, Case Study, Jigsaw, Debate].
+* Include step-by-step instructions for the instructor and the necessary prompt/data for students.
+
+## Component 3: Formative Assessment (Quiz)
+* Create [INSERT NUMBER] multiple-choice questions based on the text.
+* Include the correct answer and a brief explanation for *why* the distractors (wrong answers) are incorrect, citing the specific concept from the text.
+
+## Component 4: Accessibility & Differentiation Strategy
+* Suggest one modification to make this lesson more accessible for students with [INSERT SPECIFIC NEED, e.g., visual impairments, ADHD, English Language Learners].
+* Provide a "Stretch" resource idea for advanced students who grasp the material quickly.
+
+# Tone and Style Guidelines
+* **Tone:** Encouraging, professional, and academic.
+* **Formatting:** Use clear headers, bold key terms, and utilize tables where appropriate for data comparison.
+* **Constraint:** Do not hallucinate content outside the scope of the specified OpenStax textbook. If the content is not in the text, note it explicitly.</div>
+                            <button class="copy-btn" onclick="copyPrompt(this)">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                Copy Prompt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!-- Copilot Prompts -->
             <div class="prompt-category">
                 <h3>Microsoft Copilot Prompts</h3>
